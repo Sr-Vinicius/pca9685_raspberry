@@ -30,6 +30,11 @@ namespace exploringRPi{
 #define MODE2_OUTNE_H 1
 #define MODE2_OUTNE_L 0
 
+#define PWM_MIN_FREQ  24
+#define PWM_MAX_FREQ  1526
+#define INTERNAL_OSCILATOR_FREQ 25000000
+#define MAX_EXTERNAL_CLOCK_FREQ 50000000
+
 class pca9685 : protected I2CDevice{
   public:
 
@@ -65,6 +70,8 @@ class pca9685 : protected I2CDevice{
   protected:
     unsigned int i2c_bus, i2c_address;
     unsigned char *registers;
+    unsigned int clock_frequency;
+    bool external_clock;
 
   public:
     pca9685(unsigned int i2c_bus, unsigned int i2c_address);
@@ -76,11 +83,12 @@ class pca9685 : protected I2CDevice{
     void set_output_drive(pca9685::OUTPUT_DRIVE drive);
     void set_output_change(pca9685::OUTPUT_CHANGE change);
     void set_output_inverting(bool invert);
+    //void set_external_clock(bool extclk);
+    void set_pwm_frequency(unsigned short frequency);
 
-    // void set_pwm_frequency(uint16_t frequency);
-    // void set_pwm_duty_cycle(pca9685::CHANNEL channel, unsigned short duty_cycle);
-    // void enable_channel(pca9685::CHANNEL channel);
-    // void disable_channel(pca9685::CHANNEL channel);
+    void set_pwm_duty_cycle(pca9685::CHANNEL channel, unsigned short duty_cycle);
+    void disable_channel(pca9685::CHANNEL channel);
+    void enable_channel(pca9685::CHANNEL channel);
 };
 
 }  /* namespace exploringRPi */
