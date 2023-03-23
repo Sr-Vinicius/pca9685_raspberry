@@ -84,7 +84,7 @@ class pca9685 : protected I2CDevice{
     void set_output_change(pca9685::OUTPUT_CHANGE change);
     void set_output_inverting(bool invert);
     //void set_external_clock(bool extclk);
-    void set_pwm_frequency(unsigned short frequency);
+    void set_pwm_frequency(float frequency);
 
     void set_pwm_duty_cycle(pca9685::CHANNEL channel, unsigned short duty_cycle);
     void disable_channel(pca9685::CHANNEL channel);

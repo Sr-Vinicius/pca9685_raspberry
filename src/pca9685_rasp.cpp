@@ -1,7 +1,8 @@
 #include "pca9685_rasp.h"
+#include <unistd.h>
+#include <cmath>
 #include <iostream>
 #include <bitset>
-#include <unistd.h>
 
 namespace exploringRPi{
 
@@ -76,20 +77,17 @@ void pca9685::set_output_change(pca9685::OUTPUT_CHANGE change){
 void pca9685::set_output_inverting(bool invert){
   unsigned char mode2;
   mode2 = this->readRegister(PCA9685_MODE2);
-  
   invert? (mode2|= 1UL << MODE2_INVRT) : (mode2 &= ~(1UL << MODE2_INVRT));
-
   this->writeRegister(PCA9685_MODE2, mode2);
-}// logica testada e aprovada
- // testar resultados externos
+}
 
 
-void pca9685::set_pwm_frequency(unsigned short frequency){
-  unsigned char prescale;
-  prescale = (unsigned char)clock_frequency/(4096*frequency) - 1;
-  this->writeRegister(PCA9685_PWM_PRESCALE, prescale);
-
-  std::cout << "pre_scale: " << this->readRegister(PCA9685_PWM_PRESCALE) << std::endl;
+void pca9685::set_pwm_frequency(float frequency){
+  float prescale;
+  prescale = roundf(clock_frequency/(4096*frequency)) - 1;
+  this->sleep();
+  this->writeRegister(PCA9685_PWM_PRESCALE, (unsigned char)prescale);
+  this->wake_up();
 }
 
 

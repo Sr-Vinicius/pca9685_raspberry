@@ -13,12 +13,13 @@ int main(int argc, char *argv[]){
   std::cout << "output drive teste:" << std::endl;
   servo_driver.set_output_drive(pca9685::OPEN_DRAIN);
   servo_driver.set_output_drive(pca9685::TOTEM_POLE);
-  
+  servo_driver.set_output_inverting(false);
+
   servo_driver.set_pwm_frequency(100);
 
-  //servo_driver.enable_channel(pca9685::CH00);
-  //servo_driver.set_pwm_duty_cycle(pca9685::CH00, 2000);
-  servo_driver.disable_channel(pca9685::CH00);
+  servo_driver.enable_channel(pca9685::CH00);
+  servo_driver.set_pwm_duty_cycle(pca9685::CH00, 2000);
+  //servo_driver.disable_channel(pca9685::CH00);
 
   /* //teste de reset
   servo_driver.sleep();
