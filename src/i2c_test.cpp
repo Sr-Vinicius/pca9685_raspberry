@@ -21,12 +21,6 @@ int main(int argc, char *argv[]){
   servo_driver.set_pwm_duty_cycle(pca9685::CH00, 2000);
   //servo_driver.disable_channel(pca9685::CH00);
 
-  /* //teste de reset
-  servo_driver.sleep();
-
-  usleep(2000);
-  servo_driver.soft_reset();
-  */
 
   /*
   std::cout << "output chaange trigger test:" << std::endl;

@@ -79,7 +79,7 @@ class pca9685 : protected I2CDevice{
 
     void sleep(void);
     void wake_up(void);
-    //void soft_reset(void);
+    void restart(void);
     void set_output_drive(pca9685::OUTPUT_DRIVE drive);
     void set_output_change(pca9685::OUTPUT_CHANGE change);
     void set_output_inverting(bool invert);
