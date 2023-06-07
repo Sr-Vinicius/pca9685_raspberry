@@ -2,6 +2,7 @@
 #define __PCA9685_RASP_H__
 
 #include "I2CDevice.h"
+#include "GPIO.h"
 #include <stdint.h>
 
 namespace exploringRPi{
@@ -83,12 +84,20 @@ class pca9685 : protected I2CDevice{
     void set_output_drive(pca9685::OUTPUT_DRIVE drive);
     void set_output_change(pca9685::OUTPUT_CHANGE change);
     void set_output_inverting(bool invert);
+    //void set_output_enable(bool oe, unsigned int oe_pin);
+    //void config_outne_bits(bool outne_1, bool outne_2);
     //void set_external_clock(bool extclk);
+    //void enable_allcall_response(bool set);
+    //void config_allcall_address(unsigned short allcall_address);
     void set_pwm_frequency(float frequency);
 
     void set_pwm_duty_cycle(pca9685::CHANNEL channel, unsigned short duty_cycle);
     void disable_channel(pca9685::CHANNEL channel);
     void enable_channel(pca9685::CHANNEL channel);
+    //void enable_all_channel(void);
+    //void disable_all_channel(void);
+    //void set_all_pwm_duty_cycle(unsigned short duty_cycle);
+
 };
 
 }  /* namespace exploringRPi */

@@ -107,5 +107,10 @@ void pca9685::enable_channel(pca9685::CHANNEL channel){
   this->writeRegister(PCA9685_PWM_CH(channel)+3, ledn_off_h);
 }
 
+void pca9685::set_output_enable(bool oe, unsigned int oe_pin){
+  GPIO output_enable(oe_pin);
+  output_enable.setDirection(OUTPUT);
+  output_enable.setValue(oe);
+}
 
 } /* namespace exploringRPi */
