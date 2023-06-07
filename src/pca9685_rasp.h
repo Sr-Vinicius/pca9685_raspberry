@@ -12,6 +12,7 @@ namespace exploringRPi{
 #define PCA9685_MODE2         0x01
 #define PCA9685_PWM_CH0       0x06
 #define PCA9685_PWM_CH(x)     (0x06 + ((x)*4))
+#define PCA9685_PWM_ALL_CH    0xFA
 #define PCA9685_PWM_PRESCALE  0xFE
 
 /*MODE1 register bits*/
@@ -73,6 +74,7 @@ class pca9685 : protected I2CDevice{
     unsigned char *registers;
     unsigned int clock_frequency;
     bool external_clock;
+    int oe_pin;
 
   public:
     pca9685(unsigned int i2c_bus, unsigned int i2c_address);
@@ -84,8 +86,10 @@ class pca9685 : protected I2CDevice{
     void set_output_drive(pca9685::OUTPUT_DRIVE drive);
     void set_output_change(pca9685::OUTPUT_CHANGE change);
     void set_output_inverting(bool invert);
-    //void set_output_enable(bool oe, unsigned int oe_pin);
-    //void config_outne_bits(bool outne_1, bool outne_2);
+    void set_output_enable_value(GPIO_VALUE oe);
+    void set_output_enable_pin(unsigned int pin);
+    unsigned int get_output_enable_pin(void);
+    void config_outne_bits(bool outne_1, bool outne_0);
     //void set_external_clock(bool extclk);
     //void enable_allcall_response(bool set);
     //void config_allcall_address(unsigned short allcall_address);
@@ -94,10 +98,9 @@ class pca9685 : protected I2CDevice{
     void set_pwm_duty_cycle(pca9685::CHANNEL channel, unsigned short duty_cycle);
     void disable_channel(pca9685::CHANNEL channel);
     void enable_channel(pca9685::CHANNEL channel);
-    //void enable_all_channel(void);
-    //void disable_all_channel(void);
-    //void set_all_pwm_duty_cycle(unsigned short duty_cycle);
-
+    void enable_all_channel(void); // ALL_LED_ON e ALL_LED_OFF
+    void disable_all_channel(void);
+    void set_all_pwm_duty_cycle(unsigned short duty_cycle);
 };
 
 }  /* namespace exploringRPi */

@@ -10,17 +10,22 @@ int main(int argc, char *argv[]){
 
   pca9685 servo_driver(1, 0x40);
   
-  std::cout << "output drive teste:" << std::endl;
   servo_driver.set_output_drive(pca9685::OPEN_DRAIN);
   servo_driver.set_output_drive(pca9685::TOTEM_POLE);
   servo_driver.set_output_inverting(false);
 
-  servo_driver.set_pwm_frequency(100);
+  servo_driver.set_pwm_frequency(50);
 
+  /*
   servo_driver.enable_channel(pca9685::CH00);
-  servo_driver.set_pwm_duty_cycle(pca9685::CH00, 2000);
-  //servo_driver.disable_channel(pca9685::CH00);
+  servo_driver.set_pwm_duty_cycle(pca9685::CH00, 1000);
 
+  servo_driver.set_output_enable_pin(26); 
+  servo_driver.set_output_enable_value(HIGH);
+  */
+
+  servo_driver.enable_all_channel();
+  servo_driver.set_all_pwm_duty_cycle(1200);
 
   /*
   std::cout << "output chaange trigger test:" << std::endl;
