@@ -10,6 +10,7 @@ namespace exploringRPi{
 /* Register addresses */
 #define PCA9685_MODE1         0x00
 #define PCA9685_MODE2         0x01
+#define PCA9685_ALLCALL       0x05
 #define PCA9685_PWM_CH0       0x06
 #define PCA9685_PWM_CH(x)     (0x06 + ((x)*4))
 #define PCA9685_PWM_ALL_CH    0xFA
@@ -23,7 +24,7 @@ namespace exploringRPi{
 #define MODE1_SUB1    3
 #define MODE1_SUB2    2
 #define MODE1_SUB3    1
-#define MODE1_ALCALL  0
+#define MODE1_ALLCALL  0
 
 /*MODE2 register bits*/
 #define MODE2_INVRT   4
@@ -91,8 +92,9 @@ class pca9685 : protected I2CDevice{
     unsigned int get_output_enable_pin(void);
     void config_outne_bits(bool outne_1, bool outne_0);
     //void set_external_clock(bool extclk);
-    //void enable_allcall_response(bool set);
-    //void config_allcall_address(unsigned short allcall_address);
+    void enable_allcall_response(void);
+    void disable_allcall_response(void);
+    void config_allcall_address(unsigned char allcall_address);
     void set_pwm_frequency(float frequency);
 
     void set_pwm_duty_cycle(pca9685::CHANNEL channel, unsigned short duty_cycle);

@@ -63,8 +63,7 @@ void pca9685::set_output_change(pca9685::OUTPUT_CHANGE change){
   mode2 = this->readRegister(PCA9685_MODE2);
   change? (mode2|= 1UL << MODE2_OCH) : (mode2 &= ~(1UL << MODE2_OCH));
   this->writeRegister(PCA9685_MODE2, mode2);
-}// logica testada e aprovada
- // testar resultados externos
+}
 
 
 void pca9685::set_output_inverting(bool invert){
@@ -151,5 +150,25 @@ void pca9685::set_output_enable_value(GPIO_VALUE oe){
   output_enable.setValue(oe);
 }
 
+
+void pca9685::enable_allcall_response(){
+  unsigned char mode1;
+  mode1 = this->readRegister(PCA9685_MODE1);
+  mode1 |= 1UL << MODE1_ALLCALL;
+  this->writeRegister(PCA9685_MODE1, mode1);
+}
+
+
+void pca9685::disable_allcall_response(){
+  unsigned char mode1;
+  mode1 = this->readRegister(PCA9685_MODE1);
+  mode1 &= ~(1UL << MODE1_ALLCALL);
+  this->writeRegister(PCA9685_MODE1, mode1);
+}
+
+
+void pca9685::config_allcall_address(unsigned char allcall_address){
+  this->writeRegister(PCA9685_ALLCALL, (allcall_address << 1)); //talvez n seja necessario deslocar o valor 
+}
 
 } /* namespace exploringRPi */
