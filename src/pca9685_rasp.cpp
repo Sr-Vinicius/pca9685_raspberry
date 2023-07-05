@@ -40,7 +40,6 @@ void pca9685::restart(){
   this->sleep();
   mode1 = this->readRegister(PCA9685_MODE1);
   if(mode1 & (1<<MODE1_RESTART)){
-    std::cout << "entrou no if" << std::endl;
     this->wake_up();
     mode1 = this->readRegister(PCA9685_MODE1);
     mode1 |= 1UL << MODE1_RESTART;

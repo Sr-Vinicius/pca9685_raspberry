@@ -8,25 +8,22 @@ int main(int argc, char *argv[]){
   std::cout << "\n===================================================" << std::endl;
   std::cout << "TESTE DE TEMPLATE I2C para PCA9685\n\n" << std::endl;
 
-  pca9685 driver1(1, 0x40);
-  pca9685 driver2(1, 0x43);
-  pca9685 servo_driver(1, 0x70);
+  // pca9685 driver1(1, 0x40);
+  //pca9685 driver2(1, 0x43);
+  pca9685 servo_driver(1, 0x43);
   
-  driver1.enable_allcall_response();
-  driver2.enable_allcall_response();
+  // driver1.enable_allcall_response();
+  // driver2.enable_allcall_response();
 
-  //servo_driver.set_output_drive(pca9685::OPEN_DRAIN);
-  //servo_driver.set_output_drive(pca9685::TOTEM_POLE);
-  //servo_driver.set_output_inverting(false);
+  servo_driver.set_output_drive(pca9685::OPEN_DRAIN);
+  servo_driver.set_output_drive(pca9685::TOTEM_POLE);
+  servo_driver.set_output_inverting(false);
+  servo_driver.set_output_enable_pin(26);
+  servo_driver.set_output_enable_value(LOW);
+  servo_driver.set_pwm_frequency(50);
 
-  //servo_driver.set_pwm_frequency(50);
-
-  /*
   servo_driver.enable_channel(pca9685::CH00);
   servo_driver.set_pwm_duty_cycle(pca9685::CH00, 1000);
-  */
-  //servo_driver.set_output_enable_pin(26); 
-  //servo_driver.set_output_enable_value(LOW);
 
   //servo_driver.enable_all_channel();
   //servo_driver.set_all_pwm_duty_cycle(1200);
@@ -39,19 +36,5 @@ int main(int argc, char *argv[]){
   std::cout << "inverted logic output test:" << std::endl;
   servo_driver.set_output_inverting(true);
   servo_driver.set_output_inverting(false);
-  */
-
-  /*
-  I2CDevice pca(1, 0x40);
-  pca.open();
-  
-  std::cout << "R test - PWM freq register: " << (unsigned int)pca.readRegister(0xfe) << std::endl;
-  
-  std::cout << "W test - MODE1 register config: " << (unsigned int)pca.readRegister(0x00) << std::endl;
-  pca.writeRegister(PCA9685_MODE1, 0x21);
-  std::cout << "W test - MODE1 after config: " << (unsigned int)pca.readRegister(0x00) << std::endl;
-
-  std::cout << "FIM DO TESTE\n" << std::endl;
-  return 0;
   */
 }
