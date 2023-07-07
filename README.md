@@ -21,7 +21,7 @@ git clone https://github.com/Sr-Vinicius/pca9685_raspberry.git
 
 Go to the examples folder:
 ```bash
-cd pca9685_raspberry/examples
+cd pca9685_raspberry/examples/i2c_test
 ```
 
 And then, just run the make command:

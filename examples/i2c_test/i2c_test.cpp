@@ -8,16 +8,16 @@ int main(int argc, char *argv[]){
   std::cout << "\n===================================================" << std::endl;
   std::cout << "PCA9685 I2C test:\n\n" << std::endl;
 
-  pca9685 servo_driver(1, 0x43); /*bus 1, address 0x43*/
+  pca9685 pwm_driver(1, 0x43); /*bus 1, address 0x43*/
 
-  servo_driver.set_output_drive(pca9685::TOTEM_POLE); // or OPEN_DRAIN, as you need
-  servo_driver.set_output_inverting(false);
-  servo_driver.set_output_enable_pin(26);
-  servo_driver.set_output_enable_value(LOW);
-  servo_driver.set_pwm_frequency(50);
+  pwm_driver.set_output_drive(pca9685::TOTEM_POLE); /*or OPEN_DRAIN, as you need*/
+  pwm_driver.set_output_inverting(false);
+  pwm_driver.set_output_enable_pin(26);
+  pwm_driver.set_output_enable_value(LOW);
+  pwm_driver.set_pwm_frequency(50);
 
-  servo_driver.enable_channel(pca9685::CH00);
-  servo_driver.set_pwm_duty_cycle(pca9685::CH00, 1000);
+  pwm_driver.enable_channel(pca9685::CH00);
+  pwm_driver.set_pwm_duty_cycle(pca9685::CH00, 1000);
 
   std::cout << "Test complete!" << std::endl;
   std::cout << "Verify modified registers with the comand:\n"
@@ -28,4 +28,5 @@ int main(int argc, char *argv[]){
                "LED0_OFF_L: 0x08\nLED_OFF_H: 0x09\n\n"
                "You can also check the PWM outputs using"
                "an osciloscope, a logic analizer or a LED."<<std::endl;
+  return 0;
 }
