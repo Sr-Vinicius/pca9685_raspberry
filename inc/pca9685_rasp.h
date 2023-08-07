@@ -35,8 +35,8 @@ namespace exploringRPi{
 
 #define PWM_MIN_FREQ  24
 #define PWM_MAX_FREQ  1526
-#define INTERNAL_OSCILATOR_FREQ 25000000
-#define MAX_EXTERNAL_CLOCK_FREQ 50000000
+#define INTERNAL_OSCILATOR_FREQ 25000000.0
+#define MAX_EXTERNAL_CLOCK_FREQ 50000000.0
 
 class pca9685 : protected I2CDevice{
   public:
@@ -91,7 +91,7 @@ class pca9685 : protected I2CDevice{
     void set_output_enable_pin(unsigned int pin);
     unsigned int get_output_enable_pin(void);
     void config_outne_bits(bool outne_1, bool outne_0);
-    //void set_external_clock(bool extclk);
+    //void set_external_clock(bool extclk, float clock_freq);
     void enable_allcall_response(void);
     void disable_allcall_response(void);
     void config_allcall_address(unsigned char allcall_address);

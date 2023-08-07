@@ -2,6 +2,10 @@
 #include <unistd.h>
 #include "pca9685_rasp.h"
 
+#define FREQUENCY_BIAS 3.2 /* [Hz] */ 
+                          /* The bias must be measured 
+                           with an oscilloscope and aplied
+                          to the frequency config method*/
 #define MG996R_MIN_POSITION 1*(4096*50/1000)
 #define MG996R_MID_POSITION 1.5*(4096*50/1000)
 #define MG996R_MAX_POSITION 2*(4096*50/1000)
@@ -15,7 +19,7 @@ int main(int argc, char *argv[]){
   servo_driver.set_output_inverting(false);
   servo_driver.set_output_enable_pin(26);
   servo_driver.set_output_enable_value(LOW);
-  servo_driver.set_pwm_frequency(50);
+  servo_driver.set_pwm_frequency(50 - FREQUENCY_BIAS);
 
   /* Setting servo signal channels*/
   servo_driver.enable_channel(pca9685::CH00);

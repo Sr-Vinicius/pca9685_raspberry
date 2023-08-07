@@ -84,7 +84,7 @@ void pca9685::config_outne_bits(bool outne_1, bool outne_0){
 
 void pca9685::set_pwm_frequency(float frequency){
   float prescale;
-  prescale = roundf(clock_frequency/(4096*frequency)) - 1;
+  prescale = round(clock_frequency/(4096*frequency)) - 1;
   this->sleep();
   this->writeRegister(PCA9685_PWM_PRESCALE, (unsigned char)prescale);
   this->wake_up();
@@ -169,5 +169,10 @@ void pca9685::disable_allcall_response(){
 void pca9685::config_allcall_address(unsigned char allcall_address){
   this->writeRegister(PCA9685_ALLCALL, (allcall_address << 1)); //talvez n seja necessario deslocar o valor 
 }
-
+/*
+void pca9685::set_external_clock(bool extclk, float clock_freq){
+  external_clock = extclk;
+  clock_frequency = clock_freq;
+}
+*/
 } /* namespace exploringRPi */
